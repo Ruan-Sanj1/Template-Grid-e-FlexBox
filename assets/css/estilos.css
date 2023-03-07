@@ -1,0 +1,428 @@
+@font-face {
+    font-family: 'icones';
+    src: url(../font/icones.ttf)
+    /**Está criando uma lista de icones**/
+}
+
+body{
+    background-color: rgb(32, 32, 40);
+    font-family: 'Open Sans', 'icones', sans-serif;
+    color: white;
+}
+
+@media screen and (min-width: 1440px){
+    /**Um Media Query, o que está aqui dentro vai rodar quando a pessoa estiver em uma tela maior do que 1440px**/
+    body{
+        display: grid;
+        grid-template-columns: auto 1fr;
+    }
+}
+
+.cabecalho{
+    display:flex;
+    /**Muda o display pra um grid flexível**/
+    justify-content: space-between;
+    /**Justify-content faz com que eu possa escolher o formato do espaço do grid, e o space-btween faz com que o espaço que sobra do grid fique entre os itens.**/
+    align-items: center;
+    /**Alinhando os itens dentro do grid pra ficar apenas no centro**/
+    background-color: rgb(0, 0, 0);
+    padding: 8px 16px;
+    box-shadow: 0px 4px 4px rgb(11, 11, 37);
+}
+
+.cabecalhoMenu i::before{
+    content: "\e904";
+    font-size: 24px;
+}
+
+.cabecalhoNotificacao i::before{
+    content: "\e906";
+    font-size: 24px;
+}
+
+.cabecalhoLogo{
+    width: 40px;
+}
+
+.cabecalhoPerfil{
+    display:none;
+    /**Sinaliza que não existe, e está aqui porque na versão mobile ele não existe**/
+}
+
+@media screen and (min-width: 1440px) {
+    .cabecalho{
+        background-color: #1D232A;
+        display:grid;
+        column-gap: 32px;
+        grid-template-columns: 1fr auto;
+        padding: 16px 60px;
+        height: 80px;
+        box-sizing: border-box;
+        /**Garante que a altura vai ser respeitada**/
+        grid-column: 2;
+    }
+
+    .cabecalhoMenu{
+        display:none;
+    }
+
+    .cabecalhoLogo{
+        display:none;
+    }
+
+    .cabecalhoPerfil{
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        /**é a mesma coisa que escrever "auto auto auto"**/
+        column-gap: 8px;
+        align-items: center;
+        justify-self:  flex-end;
+        color: #95999C;
+        padding: 8px 32px;
+        border-right: 1px solid #95999C;
+    }
+    
+    .cabecalhoPerfil::before{
+        content: "";
+        display: block;
+        width: 32px;
+        height: 32px;
+        background-image: url(../img/profile_2.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .cabecalhoPerfil::after{
+        content: "\e90d";
+        color: white;
+        font-size: 1.5rem;
+    }
+}
+
+.menuLateral{
+    display: flex;
+    flex-direction: column;
+    /**Diz qual a direção que os elemento do "flex container" vão ficar (line ou column)**/
+    background-color: rgb(0, 0, 0);
+    width: 75vw;
+    /**75vw significa 75% largura da tela (viewport)**/
+    height: 100vh;
+    /**100vh significa 100% da altura do viewport**/
+    position: absolute;
+    /**Faz o elemento ficar exatamente onde eu colocar**/
+    left: -100vw;
+    /**Escondendo o menu, com 100% da largura da tela pra esquerda**/
+    transition: .25s;
+}
+
+.menuLateralAtivo{
+    left:0;
+    /**Traz o menu de volta pra posição**/
+    transition: .25s;
+    /**transição pro menu aparecer**/
+}
+
+.menuLateralLogo{
+    width: 110px;
+    align-self: center;
+    /**é pra alinhar apenas a Logo, e não tudo**/
+    padding: 16px;
+}
+
+.menuLateralLink {
+    height: 64px;
+    color: rgb(157, 157, 157);
+    padding-left: 64px;
+    display: flex;
+    align-items: center;
+}
+
+.menuLateralLinkAtivo{
+    color: white;
+    padding-left: 56px;
+    border-left: 8px solid white;
+}
+
+.menuLateralLink::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    position: absolute;
+    left:24px;
+}
+
+.menuLateralLinkInicio::before {
+    content: "\e902";
+}
+
+.menuLateralLinkVideos::before {
+    content: "\e90e";
+}
+
+.menuLateralLinkPicos::before {
+    content: "\e909";
+}
+
+.menuLateralLinkIntegrantes::before {
+    content: "\e903";
+}
+
+.menuLateralLinkCamisas::before {
+    content: "\e900";
+}
+
+.menuLateralLinkPinturas::before {
+    content: "\e90a";
+}
+
+@media screen and (min-width: 1440px){
+    .menuLateral {
+        position: static;
+        width: 200px;
+        height: auto;
+        grid-column: 1;
+        grid-row: 1 / span 2;
+    }
+}
+
+.principal{
+    padding: 24px 16px;
+    display: grid;
+    gap: 16px;
+    /**Cira o espaçamento de 16px entre tudo que está dentro da classe principal**/
+}
+
+.tituloPagina{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.tituloSecao{
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+@media screen and (min-width:1440px){
+    .principal {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas:
+            "titulo-pagina titulo-pagina titulo-pagina"
+            "destaque-video destaque-video videos-recentes"
+            "secao-videos secao-videos secao-videos"
+            "produtos-recentes destaque-produtos destaque-produtos"
+            "secao-produtos secao-produtos secao-produtos"
+        ;
+        /**Separa o grid em areas, e nomeia o que está em cada área. Se quiser trocar a disposição dos elemento é só mudar a ordem.
+        Ele tem por exemplo, três vezes o titulo-pagina porque ele ocupa as três colunas da primeira linha.**/
+        column-gap: 32px;
+        padding: 16px 60px;
+        grid-column: 2;
+    }
+
+    .tituloSecao{
+        grid-column: span 4;
+    }
+}
+
+.cartao{
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    /**O que passar do tamanho vai ficar escondido, não vai "transbordar"**/
+    background-color: rgb(44, 44, 53);
+}
+
+.cartaoImagemDesktop{
+    display: none;
+}
+
+.cartaoDestaque{
+    margin-bottom: 16px;
+}
+
+.cartaoConteudo{
+    padding: 16px;
+    display: grid;
+    /**Tranforma o display em um grid**/
+    grid-template-columns: auto 1fr;
+    /**Mostra quantas colunas o "grid" vai ter (1fr significa uma fração, "1fr 1 fr" significa duas frações) (Auto significa que ele vai automaticamente usar o tamanho do maior elemento)**/
+    gap: 8px;
+    /**gap cria um espaçamento entre todos os elementos, que no caso foi de 8px em todas as direções**/
+}
+
+.cartaoDestaque2{
+    grid-column: span 2;
+    /**Diz quantas "células" o elemento ocupa no grid**/
+}
+
+.cartaoTitulo{
+    font-size: 1.2rem;
+    font-weight: 700;
+    grid-column: span 2;
+    /**Diz quantas "células" o elemento ocupa no grid**/
+}
+
+.cartaoPerfil{
+    color: grey;
+    font-size: 0.9rem;
+    grid-column: span 2;
+    /**Diz quantas "células" o elemento ocupa no grid**/
+}
+
+.cartaoInfo{
+    display: flex;
+    align-items: center;
+    color:grey;
+}
+
+.cartaoInfoTempo::before{
+    content: "\e90c";
+    margin-right: 8px;
+}
+
+.cartaoInfoVisualizacao::before{
+    content: "\e90f";
+    margin-right: 8px;
+}
+
+.cartaoBotao{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(26, 6, 143);
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    justify-self: flex-end;
+    /**É uma propriedade do grid, a gente decidiu que fica totalmente na direita da coluna**/
+}
+
+.cartaoBotaoPlay::before{
+    content: "\e90b";
+    font-size: 24px;
+}
+
+.cartaoBotaoDestaque{
+    width: 100%;
+    grid-column: span 2;
+}
+
+.cartaoBotaoDestaque::before{
+    margin-right: 8px;
+}
+
+.cartaoRecentes{
+    display: none;
+}
+
+@media screen and (min-width: 1440px){
+    .cartaoDestaque{
+        margin-bottom: 0;
+    }
+
+    .cartaoImagemMobile{
+        display: none;
+    }
+
+    .cartaoImagemDesktop{
+        display: block;
+    }
+
+    .cartaoBotaoDestaque { 
+        grid-column: auto;
+        padding: 16px 8px;
+    }
+
+    .cartaoRecentes{
+        display:grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        row-gap: 24px;
+        width: 256px;
+        padding: 16px;
+        box-sizing: border-box;
+        align-self: flex-start;
+    }
+
+    .cartaoRecentes .cartaoTitulo{
+        grid-column: auto;
+    }
+
+    .cartaoLink{
+        font-size: 0.8rem;
+        font-weight: 600;
+        color:blue;
+        justify-content: flex-end;
+    }
+
+    .cartaoLista{
+        display: grid;
+        row-gap: 16px;
+        grid-column: span 2;
+    }
+
+    .cartaoItem{
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 8px
+    }
+
+    .cartaoItemThumbnail {
+        width: 32px;
+        grid-row: span 2;
+    }
+
+    .cartaoItemTitulo{
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+        font-weight: 700;
+    }
+
+    .cartaoItemPerfil {
+        font-size: 0.8rem;
+        color: #95999C;
+    }
+}
+
+.secao{
+    display: grid;
+    gap:16px;
+}
+
+@media screen and (min-width: 1440px){
+    .secao{
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .titulo-pagina{
+        grid-area: titulo-pagina;
+    }
+
+    .destaque-video{
+        grid-area: destaque-video;
+    }
+
+    .videosRecentes{
+        grid-area: videos-recentes;
+    }
+
+    .secao-videos{
+        grid-area: secao-videos;
+    }
+
+    .destaque-produtos{
+        grid-area: destaque-produtos;
+    }
+
+    .produtos-recentes{
+        grid-area: produtos-recentes;
+    }
+
+    .secao-produtos{
+        grid-area: secao-produtos;
+    }
+}
